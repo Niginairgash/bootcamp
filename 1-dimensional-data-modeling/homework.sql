@@ -32,7 +32,7 @@ create table actors(
 	films films[],
 	quality_class quality_class,
 	is_active boolean
-)*/
+)
 
 with years as(
 	select *
@@ -98,7 +98,9 @@ join static af
 on w.actor = af.actor
 where w.film_season is not null
 
-
+/*
+DDL for actors_history_scd table
+*/
 create table actors_history_scd(
 	actor text,
 	quality_class quality_class,
