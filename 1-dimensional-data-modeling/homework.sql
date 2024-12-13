@@ -33,7 +33,7 @@ create table actors(
 	quality_class quality_class,
 	is_active boolean
 )
-
+insert into actors
 with years as(
 	select *
 	from pg_catalog.generate_series(2000, 2024) as film_season
@@ -83,7 +83,8 @@ static as(
 )
 select 
 	w.actor,
-	af.actorid,
+	st.actorid,
+	st.year,
 	films,
 	case 
 		when (films[cardinality(films)]::films).rating > 8 then 'star'
@@ -94,8 +95,8 @@ select
 	w.film_season = year as is_active
 	
 from windowed w
-join static af
-on w.actor = af.actor
+join static st
+on w.actor = st.actor
 where w.film_season is not null
 
 /*
